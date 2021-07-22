@@ -11,8 +11,10 @@ public class Test6 {
 //        cat.say();
 
         Person person = context.getBean("personBean", Person.class);
+        System.out.println(person.getAge());
+        System.out.println(person.getName());
 //        Person person2 = context.getBean("personBean", Person.class);
-        person.callYourPet();
+//        person.callYourPet();
 
         context.close();
     }
