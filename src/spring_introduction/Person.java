@@ -9,10 +9,10 @@ public class Person {
     private String name;
     private Pet pet;
 
-    @Autowired
-    public Person(Pet pet) {
-        this.pet = pet;
-    }
+//    @Autowired
+//    public Person(Pet pet) {
+//        this.pet = pet;
+//    }
 
     public void callYourPet() {
         System.out.println("Hi, my lovely Pet!");
@@ -39,7 +39,9 @@ public class Person {
         return pet;
     }
 
+    @Autowired
     public void setPet(Pet pet) {
+        System.out.println("Class Person: set pet");
         this.pet = pet;
     }
 }
