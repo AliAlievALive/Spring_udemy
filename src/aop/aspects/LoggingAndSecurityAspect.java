@@ -9,16 +9,60 @@ import org.springframework.stereotype.Component;
 @Aspect
 public class LoggingAndSecurityAspect {
 
-    @Pointcut("execution(* get*())")
-    private void allGetMethods() {}
-
-    @Before("allGetMethods()")
-    public void beforeGetLoggingAdvice() {
-        System.out.println("beforeGetBookAdvice: try get book or journal");
+    @Pointcut("execution(* aop.UniLibrary.*(..))")
+    private void allMethodsFromUniLibrary() {
     }
 
-    @Before("allGetMethods()")
-    public void beforeGetSecurityAdvice() {
-        System.out.println("beforeGetBookAdvice: check auth Role for get book/journal");
+    @Pointcut("execution(public void aop.UniLibrary.returnMagazine())")
+    private void returnMagazineFromUniLibrary() {
     }
+
+    @Pointcut("allMethodsFromUniLibrary() && !returnMagazineFromUniLibrary()")
+    private void allMethodsExceptReturnMagazineFromUniLibrary() {
+    }
+
+    @Before("allMethodsExceptReturnMagazineFromUniLibrary()")
+    public void beforeAllMethodsExceptReturnMagazineFromUniLibrary() {
+        System.out.println("beforeAllMethodsExceptReturnMagazineFromUniLibrary: log #10");
+    }
+
+//    @Pointcut("execution(* aop.UniLibrary.get*())")
+//    private void allGetMethodsFromUniLibrary() {
+//    }
+//
+//    @Pointcut("execution(* aop.UniLibrary.return*())")
+//    private void allReturnMethodsFromUniLibrary() {
+//    }
+//
+//    @Pointcut("allGetMethodsFromUniLibrary() || allReturnMethodsFromUniLibrary()")
+//    private void allGetAndReturnMethodsFromUniLibrary() {
+//    }
+//
+//    @Before("allGetMethodsFromUniLibrary()")
+//    public void beforeGetLoggingAdvice() {
+//                System.out.println("beforeGetLoggingAdvice: writing Log #1");
+//    }
+//
+//    @Before("allReturnMethodsFromUniLibrary()")
+//    public void beforeReturnLoggingAdvice() {
+//        System.out.println("beforeReturnLoggingAdvice: writing Log #2");
+//    }
+//
+//    @Before("allGetAndReturnMethodsFromUniLibrary()")
+//    public void beforeGetAndReturnLoggingAdvice() {
+//        System.out.println("beforeGetAndReturnLoggingAdvice: writing Log #3");
+//    }
+
+//    @Pointcut("execution(* get*())")
+//    private void allGetMethods() {}
+//
+//    @Before("allGetMethods()")
+//    public void beforeGetLoggingAdvice() {
+//        System.out.println("beforeGetBookAdvice: try get book or journal");
+//    }
+//
+//    @Before("allGetMethods()")
+//    public void beforeGetSecurityAdvice() {
+//        System.out.println("beforeGetBookAdvice: check auth Role for get book/journal");
+//    }
 }
