@@ -11,14 +11,16 @@ public class NewLoggingAspect {
     @Around("execution(public String returnBook())")
     public Object aroundReturnBookLoggingAdvice(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
         System.out.println("aroundReturnBookLoggingAdvice: in library try returned book");
+        Object targetMethodResult = null;
 
-        long begin = System.currentTimeMillis();
-        Object targetMethodResult = proceedingJoinPoint.proceed();
-        targetMethodResult = "Prestuplenie and Nakazanie";
-        long end = System.currentTimeMillis();
+        try {
+            targetMethodResult = proceedingJoinPoint.proceed();
+        } catch (Exception e) {
+            System.out.println("aroundReturnBookLoggingAdvice: exception is cached " + e);
+            throw e;
+        }
 
         System.out.println("aroundReturnBookLoggingAdvice: in library correct returned book");
-        System.out.println("aroundReturnBookLoggingAdvice: method returnBook working " + (end-begin) + " millisecond");
         return targetMethodResult;
     }
 }
