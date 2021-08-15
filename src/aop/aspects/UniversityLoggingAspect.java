@@ -1,6 +1,6 @@
 package aop.aspects;
 
-import org.aspectj.lang.annotation.AfterThrowing;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.stereotype.Component;
 
@@ -28,9 +28,14 @@ public class UniversityLoggingAspect {
 //        System.out.println("afterReturningGetStudentsLoggingAdvice: logging get list of students after method getStudents");
 //    }
 
-    @AfterThrowing(pointcut = "execution(* getStudents())", throwing = "exception")
-    public void afterThrowingGetStudentsLoggingAdvice(Throwable exception) {
-        System.out.println("afterThrowingGetStudentsLoggingAdvice: logging throw of Exception " + exception);
+//    @AfterThrowing(pointcut = "execution(* getStudents())", throwing = "exception")
+//    public void afterThrowingGetStudentsLoggingAdvice(Throwable exception) {
+//        System.out.println("afterThrowingGetStudentsLoggingAdvice: logging throw of Exception " + exception);
+//
+//    }
 
+    @After("execution(* getStudents())")
+    public void afterGetStudentsLoggingAdvice() {
+        System.out.println("afterGetStudentsLoggingAdvice: logging normal method work end or throw exception");
     }
 }
