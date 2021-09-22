@@ -1,6 +1,7 @@
 package hibernate_test2;
 
-import hibernate_test.entity.Employee;
+import hibernate_test2.entity.Detail;
+import hibernate_test2.entity.Employee;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -12,15 +13,35 @@ public class Test1 {
         try (SessionFactory factory = new Configuration()
                 .configure("hibernate.cfg.xml")
                 .addAnnotatedClass(Employee.class)
-                .buildSessionFactory()) {
-            Session session = factory.getCurrentSession();
-            Employee emp = new Employee("Aleksandr", "Ivanov", "IT", 600);
+                .addAnnotatedClass(Detail.class)
+                .buildSessionFactory();
+             Session session = factory.getCurrentSession()) {
+//            Session session = factory.getCurrentSession();
+//            Employee employee = new Employee("Oleg", "Ibanov", "Sale", 700);
+//            Detail detail = new Detail("Msc", "321321321", "@ya.ru");
+//
+//            employee.setEmpDetail(detail);
+//            session.beginTransaction();
+//
+//            session.save(employee);
+//
+//            session.getTransaction().commit();
+//            System.out.println("done");
+//////////////////////////////////////////////////////////////////
+//            session.beginTransaction();
+//
+//            Employee employee = session.get(Employee.class, 10);
+//            System.out.println(employee.getDepartment());
+//
+//            session.getTransaction().commit();
+//            System.out.println("done");
+//////////////////////////////////////////////////////////////////
             session.beginTransaction();
-            session.save(emp);
+
+            Employee employee = session.get(Employee.class, 2);
+            session.delete(employee);
+
             session.getTransaction().commit();
-
-            session.close();
-
             System.out.println("done");
         }
     }
