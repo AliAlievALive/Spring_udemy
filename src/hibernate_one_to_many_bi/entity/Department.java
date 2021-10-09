@@ -21,8 +21,11 @@ public class Department {
     @Column(name = "min_salary")
     private int minSalary;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.DETACH, CascadeType.MERGE},
-            mappedBy = "department")
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            mappedBy = "department",
+            fetch = FetchType.LAZY
+    )
     List<Employee> emps;
 
     public Department() {

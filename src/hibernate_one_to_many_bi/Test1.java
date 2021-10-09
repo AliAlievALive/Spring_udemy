@@ -17,37 +17,43 @@ public class Test1 {
                 .buildSessionFactory();
              Session session = factory.getCurrentSession())
         {
-//            Department dep = new Department("IT", 300, 1_200);
+//            Department dep = new Department("Sales", 800, 1_500);
 //            Employee emp1 = new Employee("Ali", "Aliev", 800);
 //            Employee emp2 = new Employee("Zaur", "Tregulov", 1_000);
+//            Employee emp3 = new Employee("Elena", "Smirnova", 1_200);
 //
 //            dep.addEmployeeToDepartment(emp1);
 //            dep.addEmployeeToDepartment(emp2);
+//            dep.addEmployeeToDepartment(emp3);
 //
 //            session.beginTransaction();
 //            session.save(dep);
 //
 //            session.getTransaction().commit();
 //            System.out.println("done");
-///////////////////////////////////////////
-
-//            session.beginTransaction();
-//            Department department = session.get(Department.class, 1);
-//
-//            System.out.println(department);
-//            System.out.println(department.getEmps());
-//
-//            session.getTransaction().commit();
-//            System.out.println("done");
-/////////////////////////////////////////////
+//********************************************************
 
             session.beginTransaction();
-            Employee employee = session.get(Employee.class, 4);
 
-            session.delete(employee);
+            System.out.println("Get department");
+            Department department = session.get(Department.class, 4);
+
+            System.out.println("Show department");
+            System.out.println(department);
+            System.out.println("Show employees of department");
+            System.out.println(department.getEmps());
 
             session.getTransaction().commit();
             System.out.println("done");
+//**********************************************************
+
+//            session.beginTransaction();
+//            Employee employee = session.get(Employee.class, 4);
+//
+//            session.delete(employee);
+//
+//            session.getTransaction().commit();
+//            System.out.println("done");
         }
     }
 }
